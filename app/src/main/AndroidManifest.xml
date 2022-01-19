@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DataManager">
         <activity
+            android:name=".SongData"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
