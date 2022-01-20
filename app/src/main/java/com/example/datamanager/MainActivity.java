@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -40,11 +41,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(getApplicationContext(), SongData.class);
-                i.putExtra("title", titolo.getEditableText().toString());
-                i.putExtra("author", autore.getEditableText().toString());
-                i.putExtra("duration", durata.getEditableText().toString());
-                i.putExtra("date", dataUscita.getEditableText().toString());
-                i.putExtra("genre", genere.getSelectedItem().toString());
+                //Da cambiare in funzione di un salvataggio su file, ma per il momento mostra il passaggio da un oggetto ad un bundle
+                Brano b=new Brano(titolo.getEditableText().toString(), autore.getEditableText().toString(), durata.getEditableText().toString(), dataUscita.getEditableText().toString(), genere.getSelectedItem().toString());
+                i.putExtra("title", b.getTitolo());
+                i.putExtra("author", b.getAutore());
+                i.putExtra("duration", b.getDurata());
+                i.putExtra("date", b.getDataUscita());
+                i.putExtra("genre", b.getGenere());
                 startActivity(i);
             }
         });
