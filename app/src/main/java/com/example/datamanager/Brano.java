@@ -54,4 +54,9 @@ public class Brano {
     public String getGenere() {
         return genere;
     }
+
+    @Override
+    public String toString() {
+        return titolo+", "+autore+", "+durata+", "+dataUscita+", "+genere;
+    }
 }
