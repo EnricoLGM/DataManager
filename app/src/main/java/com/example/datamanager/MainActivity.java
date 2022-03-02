@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     String stringa;
 
+    final String TAG="MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 g.addBrano(titolo.getEditableText().toString(), autore.getEditableText().toString(), durata.getEditableText().toString(), dataUscita.getEditableText().toString(), genere.getSelectedItem().toString());
                 Toast.makeText(getApplicationContext(), "Brano Aggiunto", Toast.LENGTH_LONG).show();
+                Log.d(TAG, "Ho salvato il brano");
             }
         });
         leggi.setOnClickListener(new View.OnClickListener() {
