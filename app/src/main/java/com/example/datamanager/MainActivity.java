@@ -44,10 +44,19 @@ public class MainActivity extends AppCompatActivity {
         GestioneBrani g=new GestioneBrani();
         GestioneFile gF=new GestioneFile();
 
+        /*salva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                g.addBrano(titolo.getEditableText().toString(), autore.getEditableText().toString(), durata.getEditableText().toString(), dataUscita.getEditableText().toString(), genere.getSelectedItem().toString());
+                Toast.makeText(getApplicationContext(), "Brano Aggiunto", Toast.LENGTH_LONG).show();
+                Log.d(TAG, "Ho salvato il brano");
+            }
+        });*/
         salva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 g.addBrano(titolo.getEditableText().toString(), autore.getEditableText().toString(), durata.getEditableText().toString(), dataUscita.getEditableText().toString(), genere.getSelectedItem().toString());
+                gF.writeFile("brani.txt", getApplicationContext(), g.listaCanzoni());
                 Toast.makeText(getApplicationContext(), "Brano Aggiunto", Toast.LENGTH_LONG).show();
                 Log.d(TAG, "Ho salvato il brano");
             }
@@ -61,10 +70,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });*/
-        leggi.setOnClickListener(new View.OnClickListener() {
+        /*leggi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String stringa=gF.leggiRawFile(getApplicationContext());
+                Intent i=new Intent(getApplicationContext(), SongData.class);
+                i.putExtra("result", stringa);
+                startActivity(i);
+            }
+        });*/
+        leggi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String stringa=gF.readFile("brani.txt", getApplicationContext());
+                if(stringa=="") {
+                    stringa="Non sono stati aggiunti dei brani";
+                }
                 Intent i=new Intent(getApplicationContext(), SongData.class);
                 i.putExtra("result", stringa);
                 startActivity(i);
