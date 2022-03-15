@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         genere=(Spinner)findViewById(R.id.genere);
         titolo=(EditText)findViewById(R.id.titolo);
         autore=(EditText)findViewById(R.id.autore);
@@ -37,9 +38,12 @@ public class MainActivity extends AppCompatActivity {
         dataUscita=(EditText)findViewById(R.id.dataUscita);
         salva=(Button)findViewById(R.id.salva);
         leggi=(Button)findViewById(R.id.leggi);
+
         ArrayAdapter<String> adapterSongs=new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, generi);
         genere.setAdapter(adapterSongs);
         GestioneBrani g=new GestioneBrani();
+        GestioneFile gF=new GestioneFile();
+
         salva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,11 +52,20 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Ho salvato il brano");
             }
         });
-        leggi.setOnClickListener(new View.OnClickListener() {
+/*        leggi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(getApplicationContext(), SongData.class);
                 stringa=g.listaCanzoni().toString();
+                i.putExtra("result", stringa);
+                startActivity(i);
+            }
+        });*/
+        leggi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String stringa=gF.leggiRawFile(getApplicationContext());
+                Intent i=new Intent(getApplicationContext(), SongData.class);
                 i.putExtra("result", stringa);
                 startActivity(i);
             }
